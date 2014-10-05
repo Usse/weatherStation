@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" ng-app="weatherApp">
+	<head>
+  	<meta charset="UTF-8">
+		<title>weatherStation Test</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="description" content="weatherStation test">
+		<meta name="keywords" content="weather, station">
+		<meta name="author" content="Andrea Usseglio Gaudi">
+
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body>
+		<div class="container">
+
+			<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<h2><a href=".">Weather Station</a></h2>
+					</div>
+			</div>
+
+			<div class="row" ng-controller="weatherController">
+
+				<!-- cities table -->
+				<div class="col-sm-10 col-sm-offset-1">
+					<table class="table table-hover">
+						<thead>
+    					<tr>
+			          <th ng-click="reverse=!reverse;order('name', reverse)">City <i class="fa fa-sort"></i></th>
+			          <th ng-click="reverse=!reverse;order('data.main.temp', reverse)">Temperature <i class="fa fa-sort"></i></th>
+			          <th ng-click="reverse=!reverse;order('data.weather[0].description', reverse)">Description <i class="fa fa-sort"></i></th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			      	<tr ng-repeat="city in cities" ng-click="showDetails($index)">
+			      		<td>{{city.name}}</td>
+			      		<td>{{city.data.main.temp}}&deg C</td>
+			      		<td>{{city.data.weather[0].description}}</td>
+			      	</tr>
+			      </tbody>
+					</table>
+				</div>
+				<!-- end cities table -->
+
+				<!-- .weatherInfo Box -->
+				<div class="col-sm-10 col-sm-offset-1 weatherInfo" ng-show="show">
+					<hr>
+					<div class="row">
+						<div class="col-sm-10">
+							<p class="city">
+								{{cities[activeCity].name}}
+								<img ng-if="show" ng-src="http://openweathermap.org/img/w/{{cities[activeCity].data.weather[0].icon}}.png" width="60" alt="{{cities[activeCity].data.weather[0].description}}">
+							</p>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<p class="latitude">Latitude : {{cities[activeCity].data.coord.lat}}</p>
+							<p class="longitude">Longitude : {{cities[activeCity].data.coord.lon}}</p>
+							<p class="description">Description : {{cities[activeCity].data.weather[0].description}}</p>	
+						</div>
+						<div class="col-sm-4">
+							<p class="temp">Temperature : {{cities[activeCity].data.main.temp}}</p>
+							<p class="temp_max">Temperature max : {{cities[activeCity].data.main.temp_max}}</p>
+							<p class="temp_min">Temperature min : {{cities[activeCity].data.main.temp_min}}</p>
+						</div>
+						<div class="col-sm-4">
+							<p class="pressure">Pressure : {{cities[activeCity].data.main.pressure}}</p>
+							<p class="umidity">Humidity : {{cities[activeCity].data.main.humidity}}</p>		
+						</div>
+					</div>
+				</div>
+				<!-- end .weatherInfo Box -->
+
+			</div>			
+		</div> <!-- end .container -->
+		<!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script-->
+		<script src="js/angular.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>

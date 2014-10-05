@@ -1,0 +1,16 @@
+@import "partials/bootstrap";
+
+// Variables
+$mainColor : #ff3f1c;
+
+// Bootstrap behaviour
+h2 a, h2 a:hover {color:$mainColor; text-decoration:none;}
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {cursor:pointer;}
+.table-hover > thead > tr {cursor:pointer;}
+
+
+// Custom CSS
+.weatherInfo {
+	margin-top:20px;
+	.city {font-size:1.8em; font-weight:bold; color:$mainColor;}
+}
